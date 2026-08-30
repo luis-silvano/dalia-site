@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dalia.tec.br
 
-## Getting Started
+Site institucional da DALIA. Aplicação Next.js exportada como site estático e
+hospedada no Azure Static Web Apps.
 
-First, run the development server:
+## Rodar localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre em <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Antes de publicar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run verifica
+```
 
-## Learn More
+Roda, nesta ordem: checagem de tipos, testes unitários e build. Não publique com
+qualquer um dos três vermelho.
 
-To learn more about Next.js, take a look at the following resources:
+## Onde mexer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Quero mudar | Arquivo |
+| --- | --- |
+| Textos da home | `conteudo/home.ts` |
+| Código de exemplo e vereditos da demo | `conteudo/exemplo.ts` |
+| Detectores de risco da demo | `lib/integridade.ts` |
+| Menu e rodapé | `components/Cabecalho.tsx`, `components/Rodape.tsx` |
+| Uma página inteira | `app/<pagina>/page.tsx` |
+| Cores e fontes | `app/globals.css` (tokens no `:root`) |
+| Redirects e cabeçalhos HTTP | `public/staticwebapp.config.json` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Textos longos ficam em `conteudo/` justamente para permitir editar prosa sem
+encostar em componente. Toda alteração ainda passa por commit e publicação.
 
-## Deploy on Vercel
+## Verificação de integridade da página pública
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`lib/integridade.ts` reimplementa em TypeScript, para rodar no navegador do
+visitante, o que a plataforma faz no servidor: SHA-256 do conteúdo normalizado e
+detectores determinísticos de padrão de risco.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Nada é enviado para servidor nenhum — é o que a página promete ao visitante, e é
+o motivo de a demonstração não custar nada nem expor a API.
+
+Se um detector for alterado na plataforma, vale espelhar aqui. Os testes em
+`testes/integridade.test.ts` cobrem hash, normalização, cada detector e a
+ausência de falso-positivo no baseline limpo.
+
+## Marca
+
+Os arquivos em `public/marca/` são gerados a partir da pasta de identidade
+oficial. O logotipo do cabeçalho (`lockup-branco.png`) é o logotipo oficial com a
+assinatura recortada — a 30px de altura ela vira borrão ilegível. A assinatura
+completa aparece na imagem de compartilhamento (`og.png`).
+
+## Publicação
+
+```bash
+npm run verifica
+npx @azure/static-web-apps-cli deploy ./out --deployment-token "$SWA_TOKEN" --env production
+```
+
+O token sai de:
+
+```bash
+az staticwebapp secrets list --name swa-dalia-site --resource-group rg-dalia-prod-brazilsouth --query "properties.apiKey" -o tsv
+```
+
+## Pendências conhecidas
+
+- **Formulário de contato** abre o cliente de e-mail do visitante. Trocar por
+  `POST` num endpoint público da API da Dalia quando ele existir — o corpo já
+  montado em `components/FormularioContato.tsx` é o payload desejado.
+- **Política de privacidade** foi migrada do site anterior com correções de
+  redação. O texto de origem era genérico; merece revisão jurídica, ainda mais
+  agora que existe DPA assinado com clientes.
+- **Analytics**: nenhum instalado. Se entrar, preferir uma opção sem cookie para
+  não precisar de banner de consentimento.
