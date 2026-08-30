@@ -95,3 +95,20 @@ depois da correção — a página aparece sem estilo.
 
 Se acontecer: `Ctrl+Shift+R`. O servidor está correto; o cache é que não.
 Lição: 301 é permanente de verdade. Em dúvida, use 302 até ter certeza.
+
+## Chave de exemplo da demonstração
+
+A demonstração precisa de uma credencial em texto claro para ter graça, mas o
+push protection do GitHub barra qualquer coisa com formato de chave real.
+
+A chave usada (`sk_live_EXEMPLOFICTICIO123456`) tem menos de 24 caracteres
+alfanuméricos após o prefixo — abaixo do que o padrão da Stripe exige, e acima
+dos 10 que o detector da Dalia exige. Se um dia alguém "melhorar" o realismo
+dela, o push volta a ser barrado.
+
+## Identificação da empresa
+
+Razão social, CNPJ, sede e comarca vivem em `IDENTIFICACAO`, em
+`conteudo/juridico.ts`, e alimentam a qualificação nos dois documentos. Campo
+vazio simplesmente não é renderizado — há teste garantindo que placeholder nunca
+vai ao ar.
