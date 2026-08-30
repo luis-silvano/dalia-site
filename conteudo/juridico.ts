@@ -35,17 +35,19 @@ export interface Documento {
  * a mostra (ha teste garantindo isso).
  */
 export const IDENTIFICACAO = {
-  nome: 'DALIA',
-  cnpj: '',
-  endereco: '',
+  nome: 'Dalia Soluções de Tecnologia Ltda.',
+  cnpj: '66.544.067/0001-03',
+  /** Frase preposicionada inteira, para caber em "com sede ...". */
+  sede: 'na Rua Bela Cintra, 746, conjunto 142, Consolação, São Paulo/SP, CEP 01415-902',
+  comarca: 'São Paulo, Estado de São Paulo',
   email: 'contato@dalia.tec.br',
   encarregado: 'contato@dalia.tec.br',
 };
 
 export function qualificacao(): string {
   const partes = [IDENTIFICACAO.nome];
-  if (IDENTIFICACAO.cnpj) partes.push(`inscrita no CNPJ sob o nº ${IDENTIFICACAO.cnpj}`);
-  if (IDENTIFICACAO.endereco) partes.push(`com sede em ${IDENTIFICACAO.endereco}`);
+  if (IDENTIFICACAO.cnpj) partes.push(`inscrita no CNPJ/MF sob o nº ${IDENTIFICACAO.cnpj}`);
+  if (IDENTIFICACAO.sede) partes.push(`com sede ${IDENTIFICACAO.sede}`);
   return partes.join(', ');
 }
 
@@ -557,7 +559,7 @@ export const TERMOS: Documento = {
         {
           tipo: 'paragrafo',
           texto:
-            'Não havendo acordo, fica eleito o foro da comarca da sede da Dalia, salvo hipótese legal que assegure foro diverso ao consumidor.',
+            'Não havendo acordo, fica eleito o foro da comarca de São Paulo, Estado de São Paulo, com renúncia a qualquer outro, salvo hipótese legal que assegure foro diverso ao consumidor.',
         },
       ],
     },

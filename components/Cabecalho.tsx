@@ -29,7 +29,7 @@ export function Cabecalho() {
 
         <div className="flex items-center gap-2">
           <Link href="/contato/" className="botao botao-primario hidden sm:inline-flex">
-            Piloto de 30 dias
+            Solicitar avaliação
           </Link>
           <button
             type="button"

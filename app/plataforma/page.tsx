@@ -101,7 +101,7 @@ export default function Plataforma() {
               Ver a cobertura por linguagem
             </Link>
             <Link href="/contato/" className="botao botao-primario">
-              Solicitar um piloto
+              Solicitar avaliação
             </Link>
           </div>
         </div>

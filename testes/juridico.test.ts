@@ -50,7 +50,7 @@ test('a qualificação omite CNPJ e endereço enquanto não estiverem preenchido
   const q = qualificacao();
   assert.ok(q.startsWith(IDENTIFICACAO.nome));
   if (!IDENTIFICACAO.cnpj) assert.ok(!/CNPJ/.test(q), 'não pode citar CNPJ sem ter o número');
-  if (!IDENTIFICACAO.endereco) assert.ok(!/sede em/.test(q), 'não pode citar sede sem ter o endereço');
+  if (!IDENTIFICACAO.sede) assert.ok(!/com sede/.test(q), 'não pode citar sede sem ter o endereço');
 });
 
 test('quando o CNPJ existir, ele entra na qualificação', () => {

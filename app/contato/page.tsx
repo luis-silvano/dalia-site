@@ -4,7 +4,7 @@ import { FormularioContato } from '@/components/FormularioContato';
 export const metadata: Metadata = {
   title: 'Falar com a Dalia',
   description:
-    'Piloto de 30 dias, verificação de integridade ou documentação para análise de fornecedor. Fale com a Dalia.',
+    'Avaliação da plataforma, verificação de integridade ou documentação para análise de fornecedor. Fale com a Dalia.',
   alternates: { canonical: '/contato/' },
 };
 
@@ -17,7 +17,7 @@ export default function Contato() {
           <h1 className="mt-3.5 text-[clamp(2rem,4vw,3rem)]">Comece pelo seu próprio código</h1>
           <p className="chamada mt-5">
             A conversa mais útil não é uma apresentação: é rodar a verificação sobre um repositório seu e olhar o
-            resultado junto. Três repositórios, um interlocutor técnico, trinta dias.
+            resultado junto. Alguns repositórios seus, um interlocutor técnico, nenhuma mudança no seu ambiente.
           </p>
 
           <dl className="mt-8 flex flex-col gap-5 text-[0.95rem]">

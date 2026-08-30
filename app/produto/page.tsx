@@ -121,7 +121,7 @@ export default function Produto() {
               Ver a verificação de integridade
             </Link>
             <Link href="/contato/" className="botao botao-fantasma">
-              Solicitar um piloto
+              Solicitar avaliação
             </Link>
           </div>
         </div>

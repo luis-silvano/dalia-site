@@ -167,15 +167,15 @@ export default function Home() {
       <section className="pb-[90px] pt-4">
         <div className="envolve">
           <div className="cartao px-6 py-11 text-center">
-            <p className="sobrancelha">Piloto de 30 dias</p>
-            <h2 className="mt-3">Trinta dias para transformar fé em prova</h2>
+            <p className="sobrancelha">Avaliação</p>
+            <h2 className="mt-3">Transforme fé em prova, no seu próprio código</h2>
             <p className="mx-auto mt-3.5 max-w-[56ch] text-texto-2">
-              Três repositórios, um interlocutor técnico, nenhuma mudança no seu ambiente. Ao fim do mês você tem o
+              Alguns repositórios seus, um interlocutor técnico, nenhuma mudança no seu ambiente. Você termina com o
               relatório de integridade do seu próprio código — e a perícia funcionando.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link href="/contato/" className="botao botao-primario">
-                Solicitar piloto
+                Solicitar avaliação
               </Link>
               <Link href="/seguranca/" className="botao botao-fantasma">
                 Ler sobre segurança e privacidade

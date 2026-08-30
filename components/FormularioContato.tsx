@@ -5,7 +5,7 @@ import { useState } from 'react';
 const DESTINO = 'contato@dalia.tec.br';
 
 const INTERESSES = [
-  'Piloto de 30 dias',
+  'Avaliação da plataforma',
   'Verificação de integridade',
   'Documentação para análise de fornecedor',
   'Outro assunto',
