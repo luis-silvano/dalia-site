@@ -216,7 +216,7 @@ export const PRIVACIDADE: Documento = {
           tipo: 'lista',
           itens: [
             'A demonstração de verificação de integridade roda inteiramente no seu navegador. O código que você digitar ou colar não é enviado para nós nem para terceiros, não é armazenado e não sai do seu dispositivo.',
-            'O formulário de contato não envia nada para servidores nossos: ele monta a mensagem e abre o seu próprio cliente de e-mail. O tratamento começa quando você decide enviar.',
+            'O formulário de contato envia o que você preencher — nome, empresa, e-mail e a mensagem — para um endereço nosso, que encaminha o conteúdo por e-mail à nossa caixa de contato. Registramos também o endereço IP de origem, por tempo curto, apenas para impedir uso abusivo do formulário. Nada disso alimenta perfilamento nem lista de disparo.',
             'A hospedagem registra dados técnicos de acesso, como endereço IP e horário, pelo tempo necessário à segurança e ao funcionamento do serviço.',
           ],
         },

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 const DESTINO = 'contato@dalia.tec.br';
+const ENDPOINT = process.env.NEXT_PUBLIC_API_CONTATO || 'https://api.dalia.tec.br/public/contato';
 
 const INTERESSES = [
   'Avaliação da plataforma',
@@ -11,44 +12,66 @@ const INTERESSES = [
   'Outro assunto',
 ];
 
-/**
- * Sem servidor por tras: o formulario monta a mensagem e abre o cliente de
- * e-mail do visitante. Substituir por POST na API da Dalia quando o endpoint
- * publico existir — o corpo montado aqui ja e o payload desejado.
- */
+type Estado = 'parado' | 'enviando' | 'enviado' | 'erro';
+
 export function FormularioContato() {
-  const [enviado, setEnviado] = useState(false);
+  const [estado, setEstado] = useState<Estado>('parado');
 
-  function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
+  async function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    const dados = new FormData(evento.currentTarget);
+    const formulario = evento.currentTarget;
+    const dados = new FormData(formulario);
 
-    // Campo-armadilha: robo preenche, gente nao ve.
+    // Campo-armadilha: robo preenche, gente nao ve. O backend confere de novo.
     if (dados.get('empresa_confirmacao')) return;
 
-    const nome = String(dados.get('nome') ?? '').trim();
-    const empresa = String(dados.get('empresa') ?? '').trim();
-    const email = String(dados.get('email') ?? '').trim();
-    const interesse = String(dados.get('interesse') ?? '').trim();
-    const mensagem = String(dados.get('mensagem') ?? '').trim();
+    setEstado('enviando');
 
-    const corpo = [
-      `Nome: ${nome}`,
-      `Empresa: ${empresa}`,
-      `E-mail: ${email}`,
-      `Interesse: ${interesse}`,
-      '',
-      mensagem,
-    ].join('\n');
+    try {
+      const resposta = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: String(dados.get('nome') ?? '').trim(),
+          empresa: String(dados.get('empresa') ?? '').trim(),
+          email: String(dados.get('email') ?? '').trim(),
+          interesse: String(dados.get('interesse') ?? '').trim(),
+          mensagem: String(dados.get('mensagem') ?? '').trim(),
+          empresa_confirmacao: '',
+        }),
+      });
 
-    const assunto = `[Site] ${interesse} — ${empresa || nome}`;
-    window.location.href = `mailto:${DESTINO}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
-    setEnviado(true);
+      if (!resposta.ok) throw new Error(String(resposta.status));
+      formulario.reset();
+      setEstado('enviado');
+    } catch {
+      setEstado('erro');
+    }
   }
 
   const rotulo = 'mb-1.5 block text-[0.88rem] font-semibold text-texto-2';
   const campo =
-    'w-full rounded-lg border border-linha bg-fundo px-3.5 py-2.5 text-[0.98rem] text-texto placeholder:text-texto-3 focus:border-teal focus:outline-none';
+    'w-full rounded-lg border border-linha bg-fundo px-3.5 py-2.5 text-[0.98rem] text-texto placeholder:text-texto-3 focus:border-teal focus:outline-none disabled:opacity-60';
+  const enviando = estado === 'enviando';
+
+  if (estado === 'enviado') {
+    return (
+      <div className="cartao p-8" role="status">
+        <p className="etiqueta">Mensagem enviada</p>
+        <h2 className="mt-3 text-[1.4rem]">Recebemos o seu contato</h2>
+        <p className="mt-3 text-[0.98rem] text-texto-2">
+          Respondemos em até um dia útil, por uma pessoa. Se for urgente, escreva direto para{' '}
+          <a href={`mailto:${DESTINO}`} className="text-teal underline-offset-4 hover:underline">
+            {DESTINO}
+          </a>
+          .
+        </p>
+        <button type="button" className="botao botao-fantasma mt-6" onClick={() => setEstado('parado')}>
+          Enviar outra mensagem
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={aoEnviar} className="cartao flex flex-col gap-5 p-6">
@@ -57,13 +80,20 @@ export function FormularioContato() {
           <label className={rotulo} htmlFor="nome">
             Nome
           </label>
-          <input id="nome" name="nome" required autoComplete="name" className={campo} />
+          <input id="nome" name="nome" required autoComplete="name" disabled={enviando} className={campo} />
         </div>
         <div>
           <label className={rotulo} htmlFor="empresa">
             Empresa
           </label>
-          <input id="empresa" name="empresa" required autoComplete="organization" className={campo} />
+          <input
+            id="empresa"
+            name="empresa"
+            required
+            autoComplete="organization"
+            disabled={enviando}
+            className={campo}
+          />
         </div>
       </div>
 
@@ -71,14 +101,28 @@ export function FormularioContato() {
         <label className={rotulo} htmlFor="email">
           E-mail corporativo
         </label>
-        <input id="email" name="email" type="email" required autoComplete="email" className={campo} />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          disabled={enviando}
+          className={campo}
+        />
       </div>
 
       <div>
         <label className={rotulo} htmlFor="interesse">
           Sobre o que você quer falar
         </label>
-        <select id="interesse" name="interesse" className={campo} defaultValue={INTERESSES[0]}>
+        <select
+          id="interesse"
+          name="interesse"
+          defaultValue={INTERESSES[0]}
+          disabled={enviando}
+          className={campo}
+        >
           {INTERESSES.map((opcao) => (
             <option key={opcao} value={opcao}>
               {opcao}
@@ -95,6 +139,7 @@ export function FormularioContato() {
           id="mensagem"
           name="mensagem"
           rows={4}
+          disabled={enviando}
           className={campo + ' resize-y'}
           placeholder="Linguagens principais, se usam Git, o que motivou o contato…"
         />
@@ -107,13 +152,22 @@ export function FormularioContato() {
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" className="botao botao-primario">
-          Abrir e-mail com a mensagem
+        <button type="submit" className="botao botao-primario" disabled={enviando}>
+          {enviando ? 'Enviando…' : 'Enviar mensagem'}
         </button>
-        <p className="text-[0.85rem] text-texto-3">
-          {enviado
-            ? 'Abrimos o seu cliente de e-mail. Se nada acontecer, escreva direto para ' + DESTINO + '.'
-            : 'O formulário monta a mensagem e abre o seu cliente de e-mail — nada é enviado a servidores nossos.'}
+
+        <p className="text-[0.85rem] text-texto-3" role={estado === 'erro' ? 'alert' : undefined}>
+          {estado === 'erro' ? (
+            <>
+              Não conseguimos enviar agora. Tente de novo em instantes ou escreva para{' '}
+              <a href={`mailto:${DESTINO}`} className="text-teal underline-offset-4 hover:underline">
+                {DESTINO}
+              </a>
+              .
+            </>
+          ) : (
+            'Usamos os seus dados apenas para responder a este contato.'
+          )}
         </p>
       </div>
     </form>
