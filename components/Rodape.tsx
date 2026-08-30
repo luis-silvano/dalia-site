@@ -5,6 +5,7 @@ const COLUNAS = [
   {
     titulo: 'Produto',
     itens: [
+      { href: '/plataforma/', rotulo: 'A plataforma' },
       { href: '/integridade/', rotulo: 'Verificação de integridade' },
       { href: '/produto/', rotulo: 'O que cobrimos' },
       { href: '/seguranca/', rotulo: 'Segurança e privacidade' },
@@ -15,6 +16,7 @@ const COLUNAS = [
     itens: [
       { href: '/contato/', rotulo: 'Falar com a Dalia' },
       { href: '/politica-privacidade/', rotulo: 'Política de privacidade' },
+      { href: '/termos/', rotulo: 'Termos de uso' },
     ],
   },
 ];

@@ -5,8 +5,9 @@ import { useState } from 'react';
 import { Marca } from './Marca';
 
 const LINKS = [
-  { href: '/integridade/', rotulo: 'Verificar integridade' },
+  { href: '/plataforma/', rotulo: 'Plataforma' },
   { href: '/produto/', rotulo: 'O que cobrimos' },
+  { href: '/integridade/', rotulo: 'Integridade' },
   { href: '/seguranca/', rotulo: 'Segurança' },
 ];
 

@@ -108,6 +108,10 @@ export default function Home() {
               </li>
             ))}
           </ol>
+
+          <Link href="/plataforma/" className="botao botao-fantasma mt-8">
+            Conhecer a plataforma inteira
+          </Link>
         </div>
       </section>
 
