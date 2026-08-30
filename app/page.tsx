@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { DemoIntegridade } from '@/components/DemoIntegridade';
 import { FRENTES, PASSOS, PERGUNTAS_AUDITORIA } from '@/conteudo/home';
+import { Clientes } from '@/components/Clientes';
 
 export default function Home() {
   return (
@@ -46,6 +47,8 @@ export default function Home() {
           </ul>
         </div>
       </section>
+
+      <Clientes />
 
       {/* --------------------------------------------------- demonstracao */}
       <section id="demonstracao" className="faixa py-[74px]">
