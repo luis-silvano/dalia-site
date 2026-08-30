@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/staticwebapp.config.json",
-  "trailingSlash": "always",
   "routes": [
     { "route": "/governanca-analitica*", "redirect": "/produto/", "statusCode": 301 },
     { "route": "/recursos*", "redirect": "/produto/", "statusCode": 301 },
@@ -9,10 +8,6 @@
     { "route": "/about*", "redirect": "/", "statusCode": 301 },
     { "route": "/news*", "redirect": "/", "statusCode": 301 }
   ],
-  "navigationFallback": {
-    "rewrite": "/404.html",
-    "exclude": ["/_next/*", "/marca/*", "*.{png,jpg,svg,ico,css,js,woff,woff2,xml,txt}"]
-  },
   "responseOverrides": {
     "404": { "rewrite": "/404.html" }
   },

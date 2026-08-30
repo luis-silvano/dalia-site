@@ -79,3 +79,19 @@ az staticwebapp secrets list --name swa-dalia-site --resource-group rg-dalia-pro
   agora que existe DPA assinado com clientes.
 - **Analytics**: nenhum instalado. Se entrar, preferir uma opção sem cookie para
   não precisar de banner de consentimento.
+
+## Ambiente publicado
+
+- **Validação:** <https://kind-sea-0c331d50f.7.azurestaticapps.net>
+- Recurso: `swa-dalia-site` (Free) em `rg-dalia-prod-brazilsouth`, região East US 2
+- `dalia.tec.br` ainda aponta para o Webflow. A troca de DNS é o último passo.
+
+### Cuidado com redirect permanente
+
+A primeira publicação levou `"trailingSlash": "always"` na configuração do SWA,
+que emitia 301 permanente até para arquivo (`/a.css` → `/a.css/`). Navegadores
+que carregaram o site nessa janela guardaram o 301 e passaram a entrar em loop
+depois da correção — a página aparece sem estilo.
+
+Se acontecer: `Ctrl+Shift+R`. O servidor está correto; o cache é que não.
+Lição: 301 é permanente de verdade. Em dúvida, use 302 até ter certeza.
