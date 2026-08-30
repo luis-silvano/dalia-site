@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "teste": "node --test testes/*.test.ts",
+    "verifica": "tsc --noEmit && node --test testes/*.test.ts && next build"
   },
   "dependencies": {
     "react": "^18",

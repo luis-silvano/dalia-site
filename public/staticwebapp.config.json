@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "always",
+  "routes": [
+    { "route": "/governanca-analitica*", "redirect": "/produto/", "statusCode": 301 },
+    { "route": "/recursos*", "redirect": "/produto/", "statusCode": 301 },
+    { "route": "/contact*", "redirect": "/contato/", "statusCode": 301 },
+    { "route": "/historia-do-cliente*", "redirect": "/", "statusCode": 301 },
+    { "route": "/about*", "redirect": "/", "statusCode": 301 },
+    { "route": "/news*", "redirect": "/", "statusCode": 301 }
+  ],
+  "navigationFallback": {
+    "rewrite": "/404.html",
+    "exclude": ["/_next/*", "/marca/*", "*.{png,jpg,svg,ico,css,js,woff,woff2,xml,txt}"]
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
+  },
+  "globalHeaders": {
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Frame-Options": "DENY",
+    "Permissions-Policy": "geolocation=(), microphone=(), camera=(), interest-cohort=()",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".webmanifest": "application/manifest+json"
+  }
+}

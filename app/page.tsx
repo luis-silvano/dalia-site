@@ -1,101 +1,185 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { DemoIntegridade } from '@/components/DemoIntegridade';
+import { FRENTES, PASSOS, PERGUNTAS_AUDITORIA } from '@/conteudo/home';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <>
+      {/* ------------------------------------------------------------ tese */}
+      <section className="relative overflow-hidden pb-9 pt-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-[10%] -top-[40%] bottom-[40%] right-[55%] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(39,189,176,0.10),transparent_70%)]"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <div className="envolve relative">
+          <p className="sobrancelha">Controle semântico de risco</p>
+          <h1 className="mt-3.5">
+            O que roda em produção é <span className="text-teal">exatamente</span> o que foi aprovado?
+          </h1>
+          <p className="chamada mt-5 text-[1.22rem]">
+            A Dalia guarda a impressão digital de cada arquivo aprovado e vigia o significado do seu código. Quando
+            alguém altera produção por fora do fluxo, você não descobre meses depois — descobre na hora, com o diff, o
+            risco e quem alterou.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#demonstracao" className="botao botao-primario">
+              Ver a verificação funcionando
+            </a>
+            <Link href="/contato/" className="botao botao-fantasma">
+              Falar com a Dalia
+            </Link>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <ul className="mt-9 flex flex-wrap gap-x-7 gap-y-2.5 border-t border-linha-suave pt-5 text-[0.86rem] text-texto-3">
+            <li>
+              <b className="font-semibold text-texto-2">SHA-256</b> por arquivo aprovado
+            </li>
+            <li>
+              <b className="font-semibold text-texto-2">Java, SAS, SQL, Python</b> e mais
+            </li>
+            <li>
+              <b className="font-semibold text-texto-2">Sem instalar agente</b> no seu ambiente
+            </li>
+            <li>
+              <b className="font-semibold text-texto-2">Seu código não treina modelo</b>
+            </li>
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* --------------------------------------------------- demonstracao */}
+      <section id="demonstracao" className="faixa py-[74px]">
+        <div className="envolve">
+          <div className="mb-9 max-w-[70ch]">
+            <p className="sobrancelha">Demonstração ao vivo</p>
+            <h2 className="mt-3.5">Altere o código e veja a perícia acontecer</h2>
+            <p className="chamada mt-3.5">
+              Abaixo está um serviço de pagamento aprovado na Dalia. Edite à vontade — ou use o botão para simular
+              alguém mexendo direto em produção — e rode a verificação.
+            </p>
+          </div>
+          <DemoIntegridade />
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------- frentes */}
+      <section className="py-[74px]">
+        <div className="envolve">
+          <div className="mb-9 max-w-[70ch]">
+            <p className="sobrancelha">O que cobrimos</p>
+            <h2 className="mt-3.5">A camada que antivírus e EDR não enxergam: o código de negócio</h2>
+            <p className="chamada mt-3.5">
+              Endpoint, rede e identidade já têm sensor. Uma linha alterada na regra de negócio não dispara nada — o
+              sistema continua funcionando, só o significado mudou.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {FRENTES.map((frente) => (
+              <article key={frente.titulo} className="cartao p-6">
+                <p className="etiqueta">{frente.etiqueta}</p>
+                <h3 className="mb-2.5 mt-3">{frente.titulo}</h3>
+                <p className="text-[0.96rem] text-texto-2">{frente.texto}</p>
+              </article>
+            ))}
+          </div>
+
+          <Link href="/produto/" className="botao botao-fantasma mt-7">
+            Ver a cobertura em detalhe
+          </Link>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------- como funciona */}
+      <section className="faixa py-[74px]">
+        <div className="envolve">
+          <div className="mb-9 max-w-[70ch]">
+            <p className="sobrancelha">Como funciona</p>
+            <h2 className="mt-3.5">Sem instalar nada, sem mudar a sua esteira</h2>
+          </div>
+
+          {/* Numerado porque a ordem importa: cada passo depende do anterior. */}
+          <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {PASSOS.map((passo, i) => (
+              <li key={passo.titulo} className="cartao p-5">
+                <span className="font-mono text-[0.74rem] font-semibold text-teal">Passo {i + 1}</span>
+                <h3 className="mb-2 mt-2.5 text-[1.02rem]">{passo.titulo}</h3>
+                <p className="text-[0.9rem] text-texto-2">{passo.texto}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------ evidencia */}
+      <section className="py-[74px]">
+        <div className="envolve">
+          <div className="mb-9 max-w-[70ch]">
+            <p className="sobrancelha">Evidência</p>
+            <h2 className="mt-3.5">As perguntas que a auditoria faz</h2>
+            <p className="chamada mt-3.5">
+              Compliance não pergunta se você tem uma ferramenta. Pergunta o que você consegue provar, e em quanto
+              tempo.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-linha bg-superficie">
+            <table className="w-full border-collapse text-[0.94rem]">
+              <caption className="sr-only">
+                Comparação entre a resposta usual e a resposta com a Dalia para as perguntas típicas de auditoria
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" className="w-[38%] border-b border-linha px-3.5 py-3 text-left text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-texto-3">
+                    Pergunta
+                  </th>
+                  <th scope="col" className="border-b border-linha px-3.5 py-3 text-left text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-texto-3">
+                    Hoje, na prática
+                  </th>
+                  <th scope="col" className="border-b border-linha px-3.5 py-3 text-left text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-teal">
+                    Com a Dalia
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {PERGUNTAS_AUDITORIA.map((linha) => (
+                  <tr key={linha.pergunta}>
+                    <th scope="row" className="border-b border-linha-suave px-3.5 py-3.5 text-left align-top font-semibold text-texto">
+                      {linha.pergunta}
+                    </th>
+                    <td className="border-b border-linha-suave px-3.5 py-3.5 align-top italic text-texto-3">
+                      {linha.hoje}
+                    </td>
+                    <td className="border-b border-linha-suave px-3.5 py-3.5 align-top text-texto-2">{linha.dalia}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- cta */}
+      <section className="pb-[90px] pt-4">
+        <div className="envolve">
+          <div className="cartao px-6 py-11 text-center">
+            <p className="sobrancelha">Piloto de 30 dias</p>
+            <h2 className="mt-3">Trinta dias para transformar fé em prova</h2>
+            <p className="mx-auto mt-3.5 max-w-[56ch] text-texto-2">
+              Três repositórios, um interlocutor técnico, nenhuma mudança no seu ambiente. Ao fim do mês você tem o
+              relatório de integridade do seu próprio código — e a perícia funcionando.
+            </p>
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link href="/contato/" className="botao botao-primario">
+                Solicitar piloto
+              </Link>
+              <Link href="/seguranca/" className="botao botao-fantasma">
+                Ler sobre segurança e privacidade
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

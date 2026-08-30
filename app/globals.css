@@ -2,26 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------ *
+ * Identidade DALIA — mundo visual escuro, deliberado e unico.
+ * A marca oficial e monocromatica; teal e ouro entram so como
+ * sinalizacao semantica (seguro / atencao / critico).
+ * ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --fundo: #0a1017;
+  --fundo-2: #0d141c;
+  --superficie: #131c26;
+  --superficie-2: #1b2733;
+  --linha: #243343;
+  --linha-suave: #1c2836;
+
+  --texto: #f2f6f8;
+  --texto-2: #a8bac6;
+  --texto-3: #6f8494;
+
+  --teal: #27bdb0;
+  --teal-claro: #33d3c5;
+  --ouro: #e2a24b;
+  --critico: #e5484d;
+  --critico-claro: #ff9a9d;
+
+  /* As tres variaveis *-arquivo vem do next/font (fontes auto-hospedadas). */
+  --fonte-display: var(--fonte-display-arquivo), 'Trebuchet MS', sans-serif;
+  --fonte-corpo: var(--fonte-corpo-arquivo), 'Segoe UI', sans-serif;
+  --fonte-mono: var(--fonte-mono-arquivo), Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* O host pinta o fundo no tema dele: o site declara o proprio, sempre. */
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-corpo);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--fonte-display);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5.2vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  }
+
+  h3 {
+    font-size: 1.18rem;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--teal);
+    color: #06231f;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .envolve {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .sobrancelha {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .chamada {
+    font-size: 1.12rem;
+    color: var(--texto-2);
+    max-width: 62ch;
+  }
+
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 11px 18px;
+    font-weight: 600;
+    font-size: 0.94rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: var(--fonte-corpo);
+    transition:
+      transform 0.12s ease,
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .botao-primario {
+    background: var(--teal);
+    color: #06231f;
+  }
+
+  .botao-primario:hover {
+    background: var(--teal-claro);
+    transform: translateY(-1px);
+  }
+
+  .botao-fantasma {
+    border-color: var(--linha);
+    color: var(--texto);
+  }
+
+  .botao-fantasma:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .botao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .cartao {
+    background: var(--superficie);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+  }
+
+  .etiqueta {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  /* Faixa que separa secoes sem depender de margens que colapsam. */
+  .faixa {
+    background: var(--fundo-2);
+    border-top: 1px solid var(--linha-suave);
+    border-bottom: 1px solid var(--linha-suave);
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
