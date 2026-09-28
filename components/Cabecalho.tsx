@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/plataforma/', rotulo: 'Plataforma' },
   { href: '/produto/', rotulo: 'O que cobrimos' },
   { href: '/integridade/', rotulo: 'Integridade' },
+  { href: '/diagnostico/', rotulo: 'Diagnóstico' },
   { href: '/seguranca/', rotulo: 'Segurança' },
 ];
 

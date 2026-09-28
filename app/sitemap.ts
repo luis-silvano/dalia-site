@@ -6,6 +6,7 @@ const PAGINAS: { caminho: string; prioridade: number }[] = [
   { caminho: '/', prioridade: 1 },
   { caminho: '/plataforma/', prioridade: 0.9 },
   { caminho: '/integridade/', prioridade: 0.9 },
+  { caminho: '/diagnostico/', prioridade: 0.9 },
   { caminho: '/produto/', prioridade: 0.8 },
   { caminho: '/seguranca/', prioridade: 0.7 },
   { caminho: '/contato/', prioridade: 0.6 },

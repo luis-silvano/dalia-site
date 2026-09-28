@@ -7,6 +7,7 @@ const ENDPOINT = process.env.NEXT_PUBLIC_API_CONTATO || 'https://api.dalia.tec.b
 
 const INTERESSES = [
   'Avaliação da plataforma',
+  'Diagnóstico de Integridade',
   'Verificação de integridade',
   'Documentação para análise de fornecedor',
   'Outro assunto',

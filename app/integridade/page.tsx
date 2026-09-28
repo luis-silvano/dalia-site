@@ -118,7 +118,7 @@ export default function Integridade() {
                 tem perfil de administrador na sua organização.
               </li>
             </ul>
-            <Link href="/contato/" className="botao botao-primario mt-6">
+            <Link href="/diagnostico/" className="botao botao-primario mt-6">
               Ver rodando no seu código
             </Link>
           </div>

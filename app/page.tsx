@@ -170,18 +170,19 @@ export default function Home() {
       <section className="pb-[90px] pt-4">
         <div className="envolve">
           <div className="cartao px-6 py-11 text-center">
-            <p className="sobrancelha">Avaliação</p>
+            <p className="sobrancelha">Diagnóstico de Integridade</p>
             <h2 className="mt-3">Transforme fé em prova, no seu próprio código</h2>
             <p className="mx-auto mt-3.5 max-w-[56ch] text-texto-2">
-              Alguns repositórios seus, um interlocutor técnico, nenhuma mudança no seu ambiente. Você termina com o
-              relatório de integridade do seu próprio código — e a perícia funcionando.
+              Cinco dias úteis, até cinco repositórios seus, nada instalado no seu ambiente. Você termina com o
+              relatório de integridade do seu próprio código e com as mudanças de regra de negócio que passaram nos
+              últimos 90 dias sem ninguém de negócio saber.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <Link href="/contato/" className="botao botao-primario">
-                Solicitar avaliação
+              <Link href="/diagnostico/" className="botao botao-primario">
+                Ver o Diagnóstico
               </Link>
-              <Link href="/seguranca/" className="botao botao-fantasma">
-                Ler sobre segurança e privacidade
+              <Link href="/contato/" className="botao botao-fantasma">
+                Falar com a Dalia
               </Link>
             </div>
           </div>
