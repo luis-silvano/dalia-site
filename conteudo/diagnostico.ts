@@ -17,6 +17,48 @@ export const PRECO = {
   diasPorExtenso: 'cinco',
 };
 
+export interface Camada {
+  titulo: string;
+  texto: string;
+}
+
+/** Por que cobrir parque grande cabe no prazo: as duas camadas custam coisas
+ *  muito diferentes, e so a segunda escala com o tamanho do parque. */
+export const CAMADAS: Camada[] = [
+  {
+    titulo: 'A camada determinística roda em 100% do que for combinado',
+    texto:
+      'Impressão SHA-256 por arquivo e detectores de padrão. Não usa inteligência artificial, então o custo não cresce com o tamanho do parque. É ela que produz o mapa: onde está a concentração de risco.',
+  },
+  {
+    titulo: 'A camada semântica vai onde o mapa aponta',
+    texto:
+      'Aí sim entra a leitura por IA, que escreve a regra de negócio em português e faz a análise retroativa dos pull requests. É a parte cara, e por isso é dirigida em vez de uniforme.',
+  },
+];
+
+export interface Faixa {
+  nome: string;
+  pericia: string;
+  semantica: string;
+  prazo: string;
+  preco: string;
+  destaque?: boolean;
+}
+
+export const FAIXAS: Faixa[] = [
+  { nome: 'Essencial', pericia: 'até 5 repositórios', semantica: 'os 5', prazo: '1 semana', preco: 'R$ 8.000' },
+  { nome: 'Ampliado', pericia: 'até 25 repositórios', semantica: 'os 25', prazo: '3 semanas', preco: 'R$ 24.000' },
+  {
+    nome: 'Panorama',
+    pericia: '100% do parque',
+    semantica: 'os mais expostos do mapa',
+    prazo: '6 semanas',
+    preco: 'a partir de R$ 55.000',
+    destaque: true,
+  },
+];
+
 export interface Entrega {
   titulo: string;
   texto: string;

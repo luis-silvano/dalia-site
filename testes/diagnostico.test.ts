@@ -2,7 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
+  CAMADAS,
   CRONOGRAMA,
+  FAIXAS,
   ENTREGAS,
   LIMITES,
   PRECISAMOS,
@@ -15,6 +17,7 @@ import sitemap from '../app/sitemap.ts';
 /** Todo texto que o visitante lê nesta página. */
 const VISIVEIS: string[] = [
   ...ENTREGAS.flatMap((e: Entrega) => [e.titulo, e.texto]),
+  ...CAMADAS.flatMap((c) => [c.titulo, c.texto]),
   ...CRONOGRAMA.flatMap((e) => [e.quando, e.oQue]),
   ...PRECISAMOS,
   LIMITES.titulo,
@@ -110,6 +113,41 @@ test('a entrega que depende do cliente está marcada como opcional', () => {
   const producao = ENTREGAS.find((e) => /produção/i.test(e.titulo));
   assert.ok(producao, 'sumiu a entrega de confronto com produção');
   assert.equal(producao.opcional, true);
+});
+
+test('a faixa de entrada é a do preço publicado como base', () => {
+  assert.equal(FAIXAS[0].preco, PRECO.base);
+});
+
+test('todo preço de faixa está em formato brasileiro', () => {
+  for (const f of FAIXAS) {
+    assert.match(f.preco, /R\$ \d{1,3}(\.\d{3})*/, `preço fora do formato: ${f.nome} — ${f.preco}`);
+  }
+});
+
+// O Panorama e o que responde a conta grande. Se ele sumir da tabela, a pagina
+// volta a dizer "5 repositorios" para quem tem 1.200 e perde a conversa.
+test('existe uma faixa que cobre o parque inteiro', () => {
+  const panorama = FAIXAS.find((f) => /100% do parque/i.test(f.pericia));
+  assert.ok(panorama, 'sumiu a faixa que cobre o parque inteiro');
+  assert.equal(panorama.destaque, true);
+});
+
+test('as faixas crescem em cobertura e em preço', () => {
+  const valor = (p: string) => Number(p.replace(/[^\d]/g, ''));
+  for (let i = 1; i < FAIXAS.length; i += 1) {
+    assert.ok(valor(FAIXAS[i].preco) > valor(FAIXAS[i - 1].preco),
+      `${FAIXAS[i].nome} não é mais caro que ${FAIXAS[i - 1].nome}`);
+  }
+});
+
+// O argumento de escala inteiro depende disto: a camada barata cobre tudo
+// porque nao usa IA. Sem essa frase, "100% do parque" parece promessa vazia.
+test('a página explica por que cobrir 100% do parque é viável', () => {
+  const determinista = CAMADAS.find((c) => /determinística/i.test(c.titulo));
+  assert.ok(determinista, 'sumiu a camada determinística');
+  assert.match(determinista.texto, /não usa inteligência artificial/i);
+  assert.match(determinista.texto, /não cresce com o tamanho do parque/i);
 });
 
 test('a rota está no sitemap', () => {
