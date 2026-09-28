@@ -32,12 +32,12 @@ export const ENTREGAS: Entrega[] = [
   {
     titulo: 'Perícia do estado atual',
     texto:
-      'Varredura determinística, sem IA no caminho crítico, procurando o que costuma passar na revisão de código: rota exposta sem autenticação, verificação de autorização removida, credencial em texto claro, teto operacional elevado, janela de retenção de dado pessoal alterada, controle desligado por configuração e arredondamento monetário alterado.',
+      'Varredura determinística, sem IA no caminho crítico, sobre o código como ele está hoje: rota exposta sem autenticação, credencial ou segredo em texto claro, comunicação de rede e execução de comando fora do padrão, bloco codificado escondido no meio do código e destino de escrita de dado.',
   },
   {
     titulo: 'Deriva retroativa de 90 dias',
     texto:
-      'Lemos os pull requests que já foram aprovados e mostramos quais mudaram regra de negócio, em linguagem de negócio. É comum aparecer mudança relevante que passou sem que ninguém de negócio soubesse que estava decidindo algo.',
+      'Lemos os pull requests que já foram aprovados e mostramos quais mudaram regra de negócio, em linguagem de negócio. Como aqui existem duas versões para comparar, aparece o que um retrato único não revela: teto operacional elevado, janela de retenção de dado pessoal esticada, controle desligado por configuração e verificação de autorização removida. É comum sair daí uma mudança relevante que passou sem que ninguém de negócio soubesse que estava decidindo algo.',
   },
   {
     titulo: 'Documentação das regras encontradas',
@@ -64,7 +64,7 @@ export const CRONOGRAMA: Etapa[] = [
 ];
 
 export const PRECISAMOS: string[] = [
-  'Acesso de leitura a até cinco repositórios.',
+  'Acesso de leitura a até cinco repositórios, com o histórico preservado — é dele que sai o retroativo, sem a Dalia ter estado instalada antes.',
   'Quarenta e cinco minutos no começo e uma hora no fim.',
   'Nada mais: sem agente, sem instalação, sem janela de manutenção.',
 ];

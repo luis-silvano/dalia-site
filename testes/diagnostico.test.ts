@@ -56,6 +56,25 @@ test('não promete conformidade regulatória ao cliente', () => {
   assert.deepEqual(promete, []);
 });
 
+// Os detectores da Dalia rodam sobre um diff. Com baseline vazio, o arquivo
+// inteiro conta como linha nova, entao padrao de PRESENCA e detectavel num
+// retrato unico — mas "elevado", "alterada", "removida" e "desligado" comparam
+// dois lados e so existem na passagem retroativa. Prometer isso na varredura
+// de estado e promessa que nao se cumpre na entrega.
+test('a perícia de estado não promete achado que exige comparação', () => {
+  const estado = ENTREGAS.find((e) => /estado atual/i.test(e.titulo));
+  assert.ok(estado, 'sumiu a entrega de perícia do estado atual');
+  assert.doesNotMatch(estado.texto, /elevad|alterad|removid|desligad/i, estado.texto);
+});
+
+test('a deriva retroativa é quem carrega os achados comparativos', () => {
+  const retro = ENTREGAS.find((e) => /retroativa/i.test(e.titulo));
+  assert.ok(retro, 'sumiu a entrega de deriva retroativa');
+  for (const termo of [/teto operacional/i, /retenção/i, /autorização removida/i]) {
+    assert.match(retro.texto, termo, `faltou ${termo} na deriva retroativa`);
+  }
+});
+
 test('o preço está em formato brasileiro', () => {
   assert.match(PRECO.base, /^R\$ \d{1,3}(\.\d{3})*$/);
   assert.match(PRECO.repositorioAdicional, /^R\$ \d{1,3}(\.\d{3})*$/);
